@@ -12,6 +12,7 @@ class Wolf : public Animal
 {
 public:
 	Wolf(int _x, int _y);
+	Wolf(int _x, int _y, int init);
 	~Wolf();
 };
 

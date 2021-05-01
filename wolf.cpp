@@ -11,6 +11,18 @@ Wolf::Wolf(int _x, int _y)
 	this->y = _y;
 }
 
+//temporary 
+Wolf::Wolf(int _x, int _y, int init)
+{
+	cout << "wolf created" << endl;
+	this->name = WOLFNAME;
+	this->symbol = WOLFSYMBOL;
+	this->strength = WOLFSTRENGTH;
+	this->initiative = init;
+	this->x = _x;
+	this->y = _y;
+}
+
 Wolf::~Wolf()
 {
 	cout << "default destructor" << endl;

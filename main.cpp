@@ -20,14 +20,14 @@ void printUI()
 	cout << "Your choice: ";
 }
 
-
 int main()
 {
 	char choice = -1;
 	World world;
 	Grid grid;
 	Wolf wolf(5, 5);
-	Wolf wolf2(10, 10);
+	Wolf wolf2(10, 10, 3);
+	Wolf wolf3(8, 8, 4);
 	srand(time(NULL));
 
 	while (choice != '3')
@@ -42,6 +42,7 @@ int main()
 			cout << "--------GAMEPLAY---------" << endl;
 			world.spawnOrganism(wolf, grid.worldgrid);
 			world.spawnOrganism(wolf2, grid.worldgrid);
+			world.spawnOrganism(wolf3, grid.worldgrid);
 			grid.drawGrid();
 			while (choice != '5')
 			{
@@ -50,8 +51,13 @@ int main()
 				cin >> choice;
 				system("CLS");
 				grid.drawGrid();
+
+				//position
 				cout << wolf.x << " " << wolf.y << endl;
 				cout << wolf2.x << " " << wolf2.y << endl;
+
+				//initiative
+				world.makeTurn();
 			}
 
 			cout << "-------------------------" << endl;
