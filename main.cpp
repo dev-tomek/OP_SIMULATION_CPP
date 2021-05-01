@@ -3,6 +3,8 @@
 #include "grid.h"
 #include "cell.h"
 #include "organism.h"
+#include "wolf.h"
+#include "world.h"
 using namespace std;
 
 void printUI()
@@ -23,6 +25,7 @@ int main()
 {
 	char choice = -1;
 	Grid grid;
+	Wolf wolf;
 
 	while (choice != '3')
 	{

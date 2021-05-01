@@ -1,14 +1,12 @@
 #pragma once
-#include "organism.h"
+#include <iostream>
 
 class Cell
 {
 public:
-	Organism* organism;
+	std::string occupier;
 	char symbol;
-	bool occupied;
 public:
 	Cell();
 	~Cell();
-	void updateSymbol(Organism* organism);
 };

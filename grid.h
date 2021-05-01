@@ -3,7 +3,6 @@
 #include "cell.h"
 #define GRIDHEIGHT 20
 #define GRIDWIDTH 20
-using namespace std;
 
 class Grid
 {
@@ -14,4 +13,3 @@ public:
 	void drawGrid();
 	~Grid();
 };
-

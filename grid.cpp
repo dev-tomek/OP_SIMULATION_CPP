@@ -2,10 +2,10 @@
 
 Grid::Grid()
 {
-	this->worldgrid = new Cell* [GRIDHEIGHT]; //creating a vertical pointer array
+	this->worldgrid = new Cell * [GRIDHEIGHT]; //creating a vertical pointer array
 	for (int i = 0; i < GRIDHEIGHT; i++)
 	{
-		worldgrid[i] = new Cell [GRIDWIDTH]; //pointing each pointer to a new horizontal array
+		worldgrid[i] = new Cell[GRIDWIDTH]; //pointing each pointer to a new horizontal array
 	}
 }
 
@@ -15,13 +15,13 @@ void Grid::drawGrid()
 	{
 		for (int j = 0; j < GRIDWIDTH; j++)
 		{
-			cout << this->worldgrid[i][j].symbol << " ";
+			std::cout << this->worldgrid[i][j].symbol << " ";
 		}
-		cout << endl;
+		std::cout << std::endl;
 	}
 }
 
 Grid::~Grid()
 {
-	cout << "default destructor" << endl;
+	std::cout << "default destructor" << std::endl;
 }

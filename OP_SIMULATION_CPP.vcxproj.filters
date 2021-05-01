@@ -24,6 +24,15 @@
     <ClCompile Include="grid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="animal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="wolf.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="world.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cell.h">
@@ -33,6 +42,15 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="grid.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="animal.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wolf.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="world.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
