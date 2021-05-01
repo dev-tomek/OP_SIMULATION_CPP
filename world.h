@@ -12,7 +12,7 @@ public:
 public:
 	//void makeTurn();
 	//void drawWorld();
-	void spawn(Organism& organism, Cell** worldgrid);
+	void spawnOrganism(Organism& organism, Cell** worldgrid);
 
 };
 

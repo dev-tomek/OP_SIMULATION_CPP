@@ -3,7 +3,7 @@
 Cell::Cell()
 {
 	this->symbol = '#';
-	//this->occupier = false;
+	this->occupier = "empty";
 }
 
 

@@ -6,7 +6,7 @@ World::World()
 }
 
 //takes an organism and spawns it in the cell
-void World::spawn(Organism& organism, Cell** worldgrid)
+void World::spawnOrganism(Organism& organism, Cell** worldgrid)
 {
 	organism.cell = &worldgrid[organism.x][organism.y];
 	worldgrid[organism.x][organism.y].occupier = organism.name;

@@ -14,7 +14,7 @@ public:
 	int y;
 	
 public:
-	virtual void action() = 0;
+	virtual void action(Cell** worldgrid) = 0;
 	virtual void collision() = 0;
 	virtual void draw() = 0;
 };

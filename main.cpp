@@ -24,8 +24,11 @@ void printUI()
 int main()
 {
 	char choice = -1;
+	World world;
 	Grid grid;
-	Wolf wolf;
+	Wolf wolf(5, 5);
+	Wolf wolf2(10, 10);
+	srand(time(NULL));
 
 	while (choice != '3')
 	{
@@ -37,7 +40,20 @@ int main()
 		{
 			system("CLS");
 			cout << "--------GAMEPLAY---------" << endl;
+			world.spawnOrganism(wolf, grid.worldgrid);
+			world.spawnOrganism(wolf2, grid.worldgrid);
 			grid.drawGrid();
+			while (choice != '5')
+			{
+				wolf.action(grid.worldgrid);
+				wolf2.action(grid.worldgrid);
+				cin >> choice;
+				system("CLS");
+				grid.drawGrid();
+				cout << wolf.x << " " << wolf.y << endl;
+				cout << wolf2.x << " " << wolf2.y << endl;
+			}
+
 			cout << "-------------------------" << endl;
 			cin >> choice;
 			system("CLS");

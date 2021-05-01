@@ -11,7 +11,7 @@ using namespace std;
 class Wolf : public Animal
 {
 public:
-	Wolf();
+	Wolf(int _x, int _y);
 	~Wolf();
 };
 
