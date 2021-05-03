@@ -24,7 +24,6 @@ void World::spawnOrganism(Organism& organism)
 {
 	organism.cell = &grid->worldgrid[organism.x][organism.y];
 	grid->worldgrid[organism.x][organism.y].organism = &organism;
-	grid->worldgrid[organism.x][organism.y].symbol = organism.symbol;
 	organismsAlive.push_back(&organism);
 }
 

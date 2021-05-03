@@ -19,6 +19,6 @@ public:
 	~Animal();
 	virtual void action(Grid* grid, World world);
 	virtual int collision(Grid* grid, World world);
-	virtual void draw(Cell** worldgrid, int mode);
+	virtual char draw();
 };
 

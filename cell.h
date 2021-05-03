@@ -7,10 +7,10 @@ class Cell
 {
 public:
 	Organism* organism;
-	char symbol;
 	int x;
 	int y;
 public:
 	Cell();
+	char getSymbol();
 	~Cell();
 };

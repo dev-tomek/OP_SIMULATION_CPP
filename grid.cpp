@@ -21,7 +21,7 @@ void Grid::drawGrid()
 	{
 		for (int j = 0; j < GRIDWIDTH; j++)
 		{
-			std::cout << this->worldgrid[j][i].symbol << " ";
+			std::cout << this->worldgrid[j][i].getSymbol() << " ";
 		}
 		std::cout << std::endl;
 	}
@@ -42,7 +42,7 @@ void Grid::saveGridState()
 	{
 		for (int j = 0; j < GRIDWIDTH; j++)
 		{
-			fileOut << this->worldgrid[i][j].symbol << " ";
+			fileOut << this->worldgrid[j][i].getSymbol() << " ";
 		}
 		fileOut << std::endl;
 	}

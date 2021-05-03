@@ -2,19 +2,9 @@
 
 Animal::Animal() {}
 
-void Animal::draw(Cell** worldgrid, int mode)
+char Animal::draw()
 {
-	if (mode == NULL) //used for clearning the cell
-	{
-		worldgrid[this->x][this->y].organism = nullptr;
-		worldgrid[this->x][this->y].symbol = '.';
-	}
-	else //used for drawing an organism in cell
-	{
-		this->cell = &worldgrid[this->x][this->y];
-		worldgrid[this->x][this->y].organism = this;
-		worldgrid[this->x][this->y].symbol = this->symbol;
-	}
+	return this->symbol;
 }
 
 int Animal::collision(Grid* grid, World world)
@@ -26,8 +16,6 @@ int Animal::collision(Grid* grid, World world)
 
 void Animal::action(Grid* grid, World world)
 {
-	draw(grid->worldgrid, NULL); //clearing current cell (organism properties are still assigned to this cell, its just not being displayed)
-
 	//random move
 	int option;
 	//option = rand() % 4;
@@ -70,9 +58,8 @@ void Animal::action(Grid* grid, World world)
 			this->y = oldY;
 		}
 	}
-
-
-	draw(grid->worldgrid, 1); //drawing organism in the right place
+	grid->worldgrid[oldX][oldY].organism = nullptr;
+	grid->worldgrid[this->x][this->y].organism = this;
 }
 
 

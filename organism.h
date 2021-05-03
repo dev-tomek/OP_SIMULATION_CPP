@@ -22,6 +22,6 @@ public:
 public:
 	virtual void action(Grid* grid, World world) = 0;
 	virtual int collision(Grid* grid, World world) = 0;
-	virtual void draw(Cell** worldgrid, int mode) = 0;
+	virtual char draw() = 0;
 	virtual Organism* createNew(World* world, int _x, int _y) = 0;
 };
