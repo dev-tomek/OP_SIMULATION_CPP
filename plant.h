@@ -18,6 +18,6 @@ public:
 	Plant();
 	~Plant();
 	virtual void action(Grid* grid, World* world);
-	virtual int collision(Grid* grid, World* world);
+	virtual int collision(Organism* _organism);
 	virtual char draw();
 };

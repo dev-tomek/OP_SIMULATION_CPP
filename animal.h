@@ -6,9 +6,6 @@
 #include "organism.h"
 #include "grid.h"
 
-#define BREED 1
-#define KILLED 2
-
 class Organism;
 class Grid;
 class World;
@@ -19,7 +16,7 @@ public:
 	Animal();
 	~Animal();
 	virtual void action(Grid* grid, World* world);
-	virtual int collision(Grid* grid, World* world);
+	virtual int collision(Organism* _organism);
 	virtual char draw();
 };
 

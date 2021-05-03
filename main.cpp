@@ -28,7 +28,6 @@ int main()
 	Wolf wolf2(6, 17, 3, 4);
 	Wolf wolf3(6, 16, 4, 6);
 	Grass grass(6, 5);
-	
 	srand(time(NULL));
 
 	while (choice != '3')
@@ -49,8 +48,10 @@ int main()
 				world.makeTurn();
 				std::cout << wolf2.x << " " << wolf2.y << std::endl;
 				std::cout << wolf3.x << " " << wolf3.y << std::endl;
-				//std::cin >> choice;
-				choice = _getch(); //sometimes doesn't work as required
+				std::cin >> choice;
+				choice = getchar(); //sometimes doesn't work as required
+				//while (_kbhit()) {};
+
 				system("CLS");
 
 				//position
@@ -74,7 +75,6 @@ int main()
 			break;
 		}
 		}
-
 	}
 }
 
