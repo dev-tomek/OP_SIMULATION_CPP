@@ -26,6 +26,17 @@ void World::spawnOrganism(Organism& organism)
 	organismsAlive.push_back(&organism);
 }
 
+void World::deleteAnimal(Organism* organism)
+{
+	for (int i = 0; i < organismsAlive.size(); i++)
+	{
+		if (organismsAlive[i] == organism)
+		{
+			organismsAlive.erase(organismsAlive.begin() + i);
+		}
+	}
+}
+
 void World::makeTurn()
 {
 	//sorting a vector of alive animals by their initiative descendingly
@@ -33,7 +44,7 @@ void World::makeTurn()
 	for (int i = 0; i < organismsAlive.size(); i++)
 	{
 		std::cout << organismsAlive[i]->name << " with initiative: " << organismsAlive[i]->initiative << " uses his action" << std::endl;
-		organismsAlive[i]->action(this->grid, *this);
+		organismsAlive[i]->action(this->grid, this);
 	}
 }
 

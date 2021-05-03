@@ -36,6 +36,10 @@ void Grid::drawGrid()
 //consider all the 8 cases
 Cell* Grid::findNearestEmpty(int _x, int _y)
 {
+	if (_x == 0)
+	{
+		_x = 1;
+	}
 	return &worldgrid[_x - 1][_y];
 }
 

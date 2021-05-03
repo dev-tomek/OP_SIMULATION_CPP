@@ -5,7 +5,7 @@ class Organism;
 
 class Cell
 {
-private:
+public:
 	Organism* organism;
 	int x;
 	int y;

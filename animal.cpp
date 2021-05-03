@@ -7,15 +7,33 @@ char Animal::draw()
 	return this->symbol;
 }
 
-int Animal::collision(Grid* grid, World world)
+int Animal::collision(Grid* grid, World* world)
 {
-	Cell* emptyCell = grid->findNearestEmpty(this->x, this->y);
-	Organism* newOrganism = this->createNew(emptyCell);
-	world.spawnOrganism(*newOrganism);
-	return BREED;
+	Cell* curr = grid->getCell(this->x, this->y);
+	if (curr->organism->name == this->name)
+	{
+		Cell* emptyCell = grid->findNearestEmpty(this->x, this->y);
+		Organism* newOrganism = this->createNew(emptyCell);
+		world->spawnOrganism(*newOrganism);
+		return BREED;
+	}
+	else
+	{
+		Organism* opponent = curr->organism;
+		if (opponent->strength > this->strength)
+		{
+			world->deleteAnimal(this);
+			return KILLED;
+		}
+		else
+		{
+			world->deleteAnimal(opponent);
+		}
+	}
+	return -1;
 }
 
-void Animal::action(Grid* grid, World world)
+void Animal::action(Grid* grid, World* world)
 {
 	//random move
 	int option;
@@ -52,11 +70,17 @@ void Animal::action(Grid* grid, World world)
 
 	if (!grid->getCell(this->x, this->y)->isEmpty())
 	{
+
 		int result = collision(grid, world);
 		if (result == BREED)
 		{
 			this->x = oldX;
 			this->y = oldY;
+		}
+		if (result == KILLED)
+		{
+			grid->getCell(oldX, oldY)->clear(); //deleting old 
+			return;
 		}
 	}
 	grid->getCell(oldX, oldY)->clear(); //deleting old 

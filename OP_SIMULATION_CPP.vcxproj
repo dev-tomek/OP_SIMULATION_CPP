@@ -139,17 +139,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="grass.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="cell.cpp" />
     <ClCompile Include="grid.cpp" />
     <ClCompile Include="animal.cpp" />
+    <ClCompile Include="plant.cpp" />
     <ClCompile Include="wolf.cpp" />
     <ClCompile Include="world.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cell.h" />
+    <ClInclude Include="grass.h" />
     <ClInclude Include="grid.h" />
     <ClInclude Include="animal.h" />
+    <ClInclude Include="plant.h" />
     <ClInclude Include="wolf.h" />
     <ClInclude Include="organism.h" />
     <ClInclude Include="world.h" />

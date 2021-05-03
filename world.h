@@ -21,5 +21,6 @@ public:
 	void drawWorld();
 	void makeTurn();
 	void spawnOrganism(Organism& organism);
+	void deleteAnimal(Organism* organism);
 };
 

@@ -6,20 +6,18 @@
 #include "organism.h"
 #include "grid.h"
 
-#define BREED 1
-#define KILLED 2
+#define PLANTINITIATIVE 0
 
 class Organism;
 class Grid;
 class World;
 
-class Animal : public Organism
+class Plant : public Organism
 {
 public:
-	Animal();
-	~Animal();
+	Plant();
+	~Plant();
 	virtual void action(Grid* grid, World* world);
 	virtual int collision(Grid* grid, World* world);
 	virtual char draw();
 };
-

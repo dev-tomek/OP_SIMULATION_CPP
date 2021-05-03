@@ -6,6 +6,7 @@
 #include "organism.h"
 #include "wolf.h"
 #include "world.h"
+#include "grass.h"
 
 void printUI()
 {
@@ -24,8 +25,10 @@ int main()
 {
 	char choice = -1;
 	World world;
-	Wolf wolf2(6, 6, 3, 4);
-	Wolf wolf3(6, 7, 4, 6);
+	Wolf wolf2(6, 17, 3, 4);
+	Wolf wolf3(6, 16, 4, 6);
+	Grass grass(6, 5);
+	
 	srand(time(NULL));
 
 	while (choice != '3')
@@ -39,6 +42,7 @@ int main()
 			system("CLS");
 			world.spawnOrganism(wolf2);
 			world.spawnOrganism(wolf3);
+			world.spawnOrganism(grass);
 			while (choice != '2')
 			{
 				world.drawWorld();
