@@ -10,7 +10,8 @@ char Animal::draw()
 int Animal::collision(Grid* grid, World world)
 {
 	Cell* emptyCell = grid->findNearestEmpty(this->x, this->y);
-	Organism* newOrganism = this->createNew(&world, emptyCell->x, emptyCell->y);
+	Organism* newOrganism = this->createNew(emptyCell);
+	world.spawnOrganism(*newOrganism);
 	return BREED;
 }
 
@@ -49,7 +50,7 @@ void Animal::action(Grid* grid, World world)
 		this->y++; //goes right
 	}
 
-	if (grid->worldgrid[this->x][this->y].organism != nullptr)
+	if (!grid->getCell(this->x, this->y)->isEmpty())
 	{
 		int result = collision(grid, world);
 		if (result == BREED)
@@ -58,8 +59,8 @@ void Animal::action(Grid* grid, World world)
 			this->y = oldY;
 		}
 	}
-	grid->worldgrid[oldX][oldY].organism = nullptr;
-	grid->worldgrid[this->x][this->y].organism = this;
+	grid->getCell(oldX, oldY)->clear(); //deleting old 
+	grid->getCell(this->x, this->y)->setOrganism(this); //setting up new
 }
 
 

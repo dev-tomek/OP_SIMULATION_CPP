@@ -10,12 +10,12 @@ class Grid
 {
 private:
 	std::ofstream fileOut;
-public:
 	Cell** worldgrid;
 public:
 	Grid();
 	void saveGridState();
 	void drawGrid();
+	Cell* getCell(int _x, int _y);
 	Cell* findNearestEmpty(int _x, int _y);
 	~Grid();
 };

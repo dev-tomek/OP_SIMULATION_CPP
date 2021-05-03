@@ -22,8 +22,7 @@ void World::drawWorld()
 //takes an organism and spawns it in the cell
 void World::spawnOrganism(Organism& organism)
 {
-	organism.cell = &grid->worldgrid[organism.x][organism.y];
-	grid->worldgrid[organism.x][organism.y].organism = &organism;
+	grid->getCell(organism.x, organism.y)->setOrganism(&organism);
 	organismsAlive.push_back(&organism);
 }
 

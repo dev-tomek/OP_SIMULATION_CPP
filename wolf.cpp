@@ -22,10 +22,9 @@ Wolf::Wolf(int _x, int _y, int init, int str)
 	this->y = _y;
 }
 
-Organism* Wolf::createNew(World* world, int _x, int _y)
+Organism* Wolf::createNew(Cell* cell)
 {
-	Organism* newWolf = new Wolf(_x, _y);
-	world->spawnOrganism(*newWolf);
+	Organism* newWolf = new Wolf(cell->getX(), cell->getY());
 	return newWolf;
 }
 

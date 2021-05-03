@@ -75,7 +75,5 @@ int main()
 }
 
 //todo
-//write a polymorphic function that will spawn any organism you pass by its name
-//breed
 //kill
 //some idea for loading the game state

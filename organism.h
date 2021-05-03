@@ -12,7 +12,6 @@ class Organism
 {
 public:
 	std::string name;
-	Cell* cell;
 	char symbol;
 	int strength;
 	int initiative;
@@ -23,5 +22,5 @@ public:
 	virtual void action(Grid* grid, World world) = 0;
 	virtual int collision(Grid* grid, World world) = 0;
 	virtual char draw() = 0;
-	virtual Organism* createNew(World* world, int _x, int _y) = 0;
+	virtual Organism* createNew(Cell* cell) = 0;
 };

@@ -8,10 +8,15 @@ Grid::Grid()
 		worldgrid[i] = new Cell[GRIDWIDTH]; //pointing each pointer to a new horizontal array
 		for (int j = 0; j < GRIDWIDTH; j++)
 		{
-			this->worldgrid[i][j].x = i;
-			this->worldgrid[i][j].y = j;
+			this->worldgrid[i][j].setX(i);
+			this->worldgrid[i][j].setY(j);
 		}
 	}
+}
+
+Cell* Grid::getCell(int _x, int _y)
+{
+	return &this->worldgrid[_x][_y];
 }
 
 void Grid::drawGrid()

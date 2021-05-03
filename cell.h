@@ -5,12 +5,19 @@ class Organism;
 
 class Cell
 {
-public:
+private:
 	Organism* organism;
 	int x;
 	int y;
 public:
 	Cell();
 	char getSymbol();
+	int getX();
+	int getY();
+	void setX(int value);
+	void setY(int value);
+	bool isEmpty();
+	void clear();
+	void setOrganism(Organism* organism);
 	~Cell();
 };
