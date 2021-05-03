@@ -33,14 +33,25 @@ void Grid::drawGrid()
 	std::cout << "----------------------------------------" << std::endl;
 }
 
-//consider all the 8 cases
 Cell* Grid::findNearestEmpty(int _x, int _y)
 {
-	if (_x == 0)
+	if (this->worldgrid[_x - 1][_y].isEmpty() && _x > 0)
 	{
-		_x = 1;
+		return &worldgrid[_x - 1][_y];
 	}
-	return &worldgrid[_x - 1][_y];
+	else if (this->worldgrid[_x + 1][_y].isEmpty() && _x < GRIDWIDTH - 1)
+	{
+		return &worldgrid[_x + 1][_y];
+	}
+	else if (this->worldgrid[_x][_y - 1].isEmpty() && _y > 0)
+	{
+		return &worldgrid[_x][_y - 1];
+	}
+	else if (this->worldgrid[_x][_y + 1].isEmpty() && _y < GRIDHEIGHT - 1)
+	{
+		return &worldgrid[_x][_y + 1];
+	}
+	return nullptr;
 }
 
 //autosave function

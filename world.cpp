@@ -26,7 +26,7 @@ void World::spawnOrganism(Organism& organism)
 	organismsAlive.push_back(&organism);
 }
 
-void World::deleteAnimal(Organism* organism)
+void World::deleteOrganism(Organism* organism)
 {
 	for (int i = 0; i < organismsAlive.size(); i++)
 	{

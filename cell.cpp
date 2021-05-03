@@ -33,7 +33,7 @@ void Cell::setY(int value)
 
 bool Cell::isEmpty()
 {
-	return organism == nullptr;
+	return this->organism == nullptr;
 }
 
 void Cell::clear()

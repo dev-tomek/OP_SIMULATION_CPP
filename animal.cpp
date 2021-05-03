@@ -11,13 +11,12 @@ int Animal::collision(Organism* _organism)
 {
 	if (_organism->name == this->name)
 	{
-		
 		return BREED;
 	}
 	else
 	{
-		Organism* opponent = _organism;
-		if (opponent->strength > this->strength)
+		Organism* opponent = _organism;             //??????????????
+		if (opponent->strength > this->strength)    // TAKE CARE OF EQUAL STRENGTH
 		{
 			return KILLED;
 		}
@@ -25,25 +24,21 @@ int Animal::collision(Organism* _organism)
 	return -1;
 }
 
+bool Animal::inBounds(int x, int y)
+{
+	return ((0 < x < 19) && (0 < y < 19));
+}
+
 void Animal::action(Grid* grid, World* world)
 {
 	//random move
 	int option;
-	//option = rand() % 4;
-	option = rand() % 2;
-	if (option == 1)
-	{
-		option = 2;
-	}
-	else
-	{
-		option = -1;
-	}
+	option = rand() % 4;
 
 	int oldX = this->x;
 	int oldY = this->y;
 
-	if (option == 0 && this->x > 0)
+	if (option == 0 && this->x > 0)                                       //TAKE CARE OF THE CASE WHEN ORGANISM IS NEXT TO THE WALL AND OPTION IS THE WALL
 	{
 		this->x--; //goes up
 	}
@@ -60,13 +55,13 @@ void Animal::action(Grid* grid, World* world)
 		this->y++; //goes right
 	}
 
-	if (!grid->getCell(this->x, this->y)->isEmpty())
+	if ((!grid->getCell(this->x, this->y)->isEmpty()) && (inBounds(this->x, this->y))) //checking if grid that the organism went to isn't empty
 	{
-		Organism* b = grid->getCell(this->x, this->y)->organism;
+		Organism* occupier = grid->getCell(this->x, this->y)->organism; //get organism on that cell
 		
-		int myresult = collision(b);
-		int hisresult = b->collision(this);
-		if (myresult == BREED)
+		int attackerState = collision(occupier);                        //collision handling for attacker
+		int occupierState = occupier->collision(this);					//collision handling for occupier
+		if (attackerState == BREED)
 		{
 			Cell* emptyCell = grid->findNearestEmpty(this->x, this->y);
 			Organism* newOrganism = this->createNew(emptyCell);
@@ -74,23 +69,21 @@ void Animal::action(Grid* grid, World* world)
 			this->x = oldX;
 			this->y = oldY;
 		}
-		if (myresult == KILLED)
+		if (attackerState == KILLED)
 		{
-			world->deleteAnimal(this);
+			world->deleteOrganism(this);
 			grid->getCell(oldX, oldY)->clear(); //deleting old 
 			return;
 		}
-		if (hisresult == KILLED)
+		if (occupierState == KILLED)
 		{
-			world->deleteAnimal(b);
+			world->deleteOrganism(occupier);
 			return;
 		}
 	}
 	grid->getCell(oldX, oldY)->clear(); //deleting old 
 	grid->getCell(this->x, this->y)->setOrganism(this); //setting up new
 }
-
-
 
 Animal::~Animal()
 {

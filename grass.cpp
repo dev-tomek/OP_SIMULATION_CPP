@@ -11,8 +11,8 @@ Grass::Grass(int _x, int _y)
 
 Organism* Grass::createNew(Cell* cell)
 {
-	Organism* newWolf = new Grass(cell->getX(), cell->getY());
-	return newWolf;
+	Organism* newGrass = new Grass(cell->getX(), cell->getY());
+	return newGrass;
 }
 
 Grass::~Grass()

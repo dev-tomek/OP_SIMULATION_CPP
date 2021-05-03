@@ -48,7 +48,7 @@ int main()
 				world.makeTurn();
 				std::cout << wolf2.x << " " << wolf2.y << std::endl;
 				std::cout << wolf3.x << " " << wolf3.y << std::endl;
-				std::cin >> choice;
+				//std::cin >> choice;
 				choice = getchar(); //sometimes doesn't work as required
 				//while (_kbhit()) {};
 
