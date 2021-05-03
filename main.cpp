@@ -1,23 +1,23 @@
 #include <iostream>
+#include <conio.h>
 #include "stdlib.h"
 #include "grid.h"
 #include "cell.h"
 #include "organism.h"
 #include "wolf.h"
 #include "world.h"
-using namespace std;
 
 void printUI()
 {
-	cout << "-------------------------" << endl;
-	cout << "Author: Tomasz Kuczynski" << endl;
-	cout << "Student ID: s184593" << endl;
-	cout << "--------MAIN MENU--------" << endl;
-	cout << "1. Start a new game" << endl;
-	cout << "2. Load a game" << endl;
-	cout << "3. Quit" << endl;
-	cout << "-------------------------" << endl;
-	cout << "Your choice: ";
+	std::cout << "-------------------------" << std::endl;
+	std::cout << "Author: Tomasz Kuczynski" << std::endl;
+	std::cout << "Student ID: s184593" << std::endl;
+	std::cout << "--------MAIN MENU--------" << std::endl;
+	std::cout << "1. Start" << std::endl;
+	std::cout << "2. Continue" << std::endl;
+	std::cout << "3. Quit" << std::endl;
+	std::cout << "-------------------------" << std::endl;
+	std::cout << "Your choice: ";
 }
 
 int main()
@@ -25,43 +25,36 @@ int main()
 	char choice = -1;
 	World world;
 	Grid grid;
-	Wolf wolf(5, 5);
-	Wolf wolf2(10, 10, 3);
-	Wolf wolf3(8, 8, 4);
+	world.grid = &grid;
+	Wolf wolf2(6, 6, 3, 4);
+	Wolf wolf3(6, 7, 4, 6);
 	srand(time(NULL));
 
 	while (choice != '3')
 	{
 		printUI();
-		cin >> choice;
+		std::cin >> choice;
 		switch (choice)
 		{
 		case '1':
 		{
 			system("CLS");
-			cout << "--------GAMEPLAY---------" << endl;
-			world.spawnOrganism(wolf, grid.worldgrid);
-			world.spawnOrganism(wolf2, grid.worldgrid);
-			world.spawnOrganism(wolf3, grid.worldgrid);
-			grid.drawGrid();
-			while (choice != '5')
+			world.spawnOrganism(wolf2);
+			world.spawnOrganism(wolf3);
+			while (choice != '2')
 			{
-				wolf.action(grid.worldgrid);
-				wolf2.action(grid.worldgrid);
-				cin >> choice;
-				system("CLS");
 				grid.drawGrid();
+				grid.saveGridState();
+				world.makeTurn();
+				std::cout << wolf2.x << " " << wolf2.y << std::endl;
+				std::cout << wolf3.x << " " << wolf3.y << std::endl;
+				//std::cin >> choice;
+				choice = _getch(); //sometimes doesn't work as required
+				system("CLS");
+				//grid.drawGrid();
 
 				//position
-				cout << wolf.x << " " << wolf.y << endl;
-				cout << wolf2.x << " " << wolf2.y << endl;
-
-				//initiative
-				world.makeTurn();
 			}
-
-			cout << "-------------------------" << endl;
-			cin >> choice;
 			system("CLS");
 			break;
 		}
@@ -69,7 +62,7 @@ int main()
 		{
 			system("CLS");
 
-			cout << "LOADING" << endl;
+			std::cout << "LOADING" << std::endl;
 		}
 		case '3':
 		{
@@ -77,10 +70,16 @@ int main()
 		}
 		default:
 		{
-			cout << "Choice does not exist." << endl;
+			std::cout << "Choice does not exist." << std::endl;
 			break;
 		}
 		}
 
 	}
 }
+
+//todo
+//write a polymorphic function that will spawn any organism you pass by its name
+//breed
+//kill
+//some idea for loading the game state

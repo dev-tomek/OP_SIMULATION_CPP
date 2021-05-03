@@ -1,19 +1,24 @@
 #pragma once
 #include <iostream>
-#include "organism.h"
-#include "grid.h"
 #include <stdlib.h>
 #include <time.h>
+#include "world.h"
+#include "organism.h"
+#include "grid.h"
 
-using namespace std;
+#define BREED 1
+
+class Organism;
+class Grid;
+class World;
 
 class Animal : public Organism
 {
 public:
 	Animal();
 	~Animal();
-	virtual void action(Cell** worldgrid);
-	virtual void collision();
-	virtual void draw();
+	virtual void action(Grid* grid, World world);
+	virtual int collision(Grid* grid, World world);
+	virtual void draw(Cell** worldgrid, int mode);
 };
 

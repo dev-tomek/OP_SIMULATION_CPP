@@ -2,10 +2,9 @@
 
 Cell::Cell()
 {
-	this->symbol = '#';
-	this->occupier = "empty";
+	this->symbol = '.';
+	this->organism = nullptr;
 }
-
 
 Cell::~Cell()
 {

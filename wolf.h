@@ -1,7 +1,6 @@
 #pragma once
 #include <iostream>
 #include "animal.h"
-using namespace std;
 
 #define WOLFSTRENGTH 9;
 #define WOLFINITIATIVE 5;
@@ -12,7 +11,8 @@ class Wolf : public Animal
 {
 public:
 	Wolf(int _x, int _y);
-	Wolf(int _x, int _y, int init);
+	Wolf(int _x, int _y, int init, int str);
+	Organism* createNew(World* world, int _x, int _y) override;
 	~Wolf();
 };
 

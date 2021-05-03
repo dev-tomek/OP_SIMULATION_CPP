@@ -1,58 +1,83 @@
 #include "animal.h"
 
-Animal::Animal()
+Animal::Animal() {}
+
+void Animal::draw(Cell** worldgrid, int mode)
 {
-	cout << "default animal constructor" << endl;
+	if (mode == NULL) //used for clearning the cell
+	{
+		worldgrid[this->x][this->y].organism = nullptr;
+		worldgrid[this->x][this->y].symbol = '.';
+	}
+	else //used for drawing an organism in cell
+	{
+		this->cell = &worldgrid[this->x][this->y];
+		worldgrid[this->x][this->y].organism = this;
+		worldgrid[this->x][this->y].symbol = this->symbol;
+	}
 }
 
-
-void Animal::action(Cell** worldgrid)
+int Animal::collision(Grid* grid, World world)
 {
-	//reseting current cell
-	worldgrid[this->x][this->y].occupier = "empty";
-	worldgrid[this->x][this->y].symbol = '#';
+	Cell* emptyCell = grid->findNearestEmpty(this->x, this->y);
+	Organism* newOrganism = this->createNew(&world, emptyCell->x, emptyCell->y);
+	return BREED;
+}
+
+void Animal::action(Grid* grid, World world)
+{
+	draw(grid->worldgrid, NULL); //clearing current cell (organism properties are still assigned to this cell, its just not being displayed)
 
 	//random move
 	int option;
-	option = rand() % 4;
-	//goes up
-	if (option == 0 && this->x > 0) //making sure x doesn't go out the gird
+	//option = rand() % 4;
+	option = rand() % 2;
+	if (option == 1)
 	{
-		this->x--;
+		option = 2;
 	}
-	//goes down
-	else if (option == 1 && this->x < GRIDHEIGHT)
+	else
 	{
-		this->x++;
+		option = -1;
 	}
-	//goes left
+
+	int oldX = this->x;
+	int oldY = this->y;
+
+	if (option == 0 && this->x > 0)
+	{
+		this->x--; //goes up
+	}
+	else if (option == 1 && this->x < GRIDHEIGHT - 1)
+	{
+		this->x++; //goes down
+	}
 	else if (option == 2 && this->y > 0)
 	{
-		this->y--;
+		this->y--; //goes left
 	}
-	//goes right
-	else if (option == 3 && this->y < GRIDWIDTH)
+	else if (option == 3 && this->y < GRIDWIDTH - 1)
 	{
-		this->y++;
+		this->y++; //goes right
 	}
 
-	//spawning in the right place
-	this->cell = &worldgrid[this->x][this->y];
-	worldgrid[this->x][this->y].occupier = this->name;
-	worldgrid[this->x][this->y].symbol = this->symbol;
+	if (grid->worldgrid[this->x][this->y].organism != nullptr)
+	{
+		int result = collision(grid, world);
+		if (result == BREED)
+		{
+			this->x = oldX;
+			this->y = oldY;
+		}
+	}
+
+
+	draw(grid->worldgrid, 1); //drawing organism in the right place
 }
 
-void Animal::collision()
-{
-	cout << "collision" << endl;
-}
 
-void Animal::draw()
-{
-	cout << "draw" << endl;
-}
 
 Animal::~Animal()
 {
-	cout << "default destructor" << endl;
+	std::cout << "default destructor" << std::endl;
 }

@@ -1,28 +1,23 @@
 #pragma once
 #include <iostream>
-#include "organism.h"
-#include "grid.h"
 #include <algorithm>
 #include <vector>
+#include "organism.h"
+#include "grid.h"
 
-struct initiativeComparison
-{
-	inline bool operator() (const Organism* organism1, const Organism* organism2)
-	{
-		return (organism1->initiative > organism2->initiative);
-	}
-};
+class Grid;
+class Organism;
+class Cell;
 
 class World
 {
 public:
 	std::vector<Organism*> organismsAlive;
-	
+	Grid* grid;
 public:
 	World();
 	~World();
 	void makeTurn();
-	//void drawWorld();
-	void spawnOrganism(Organism& organism, Cell** worldgrid);
+	void spawnOrganism(Organism& organism);
 };
 

@@ -1,6 +1,12 @@
 #pragma once
 #include <iostream>
 #include "cell.h"
+#include "world.h"
+#include "grid.h"
+
+class Grid;
+class Cell;
+class World;
 
 class Organism
 {
@@ -14,7 +20,8 @@ public:
 	int y;
 	
 public:
-	virtual void action(Cell** worldgrid) = 0;
-	virtual void collision() = 0;
-	virtual void draw() = 0;
+	virtual void action(Grid* grid, World world) = 0;
+	virtual int collision(Grid* grid, World world) = 0;
+	virtual void draw(Cell** worldgrid, int mode) = 0;
+	virtual Organism* createNew(World* world, int _x, int _y) = 0;
 };

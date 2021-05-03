@@ -1,8 +1,8 @@
 #include "wolf.h"
 
+
 Wolf::Wolf(int _x, int _y)
 {
-	cout << "wolf created" << endl;
 	this->name = WOLFNAME;
 	this->symbol = WOLFSYMBOL;
 	this->strength = WOLFSTRENGTH;
@@ -11,19 +11,25 @@ Wolf::Wolf(int _x, int _y)
 	this->y = _y;
 }
 
-//temporary 
-Wolf::Wolf(int _x, int _y, int init)
+//temporary overload
+Wolf::Wolf(int _x, int _y, int init, int str)
 {
-	cout << "wolf created" << endl;
 	this->name = WOLFNAME;
 	this->symbol = WOLFSYMBOL;
-	this->strength = WOLFSTRENGTH;
+	this->strength = str;
 	this->initiative = init;
 	this->x = _x;
 	this->y = _y;
 }
 
+Organism* Wolf::createNew(World* world, int _x, int _y)
+{
+	Organism* newWolf = new Wolf(_x, _y);
+	world->spawnOrganism(*newWolf);
+	return newWolf;
+}
+
 Wolf::~Wolf()
 {
-	cout << "default destructor" << endl;
+	std::cout << "default destructor" << std::endl;
 }
