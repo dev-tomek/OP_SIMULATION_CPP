@@ -24,8 +24,6 @@ int main()
 {
 	char choice = -1;
 	World world;
-	Grid grid;
-	world.grid = &grid;
 	Wolf wolf2(6, 6, 3, 4);
 	Wolf wolf3(6, 7, 4, 6);
 	srand(time(NULL));
@@ -43,15 +41,13 @@ int main()
 			world.spawnOrganism(wolf3);
 			while (choice != '2')
 			{
-				grid.drawGrid();
-				grid.saveGridState();
+				world.drawWorld();
 				world.makeTurn();
 				std::cout << wolf2.x << " " << wolf2.y << std::endl;
 				std::cout << wolf3.x << " " << wolf3.y << std::endl;
 				//std::cin >> choice;
 				choice = _getch(); //sometimes doesn't work as required
 				system("CLS");
-				//grid.drawGrid();
 
 				//position
 			}

@@ -1,6 +1,9 @@
 #include "world.h"
 
-World::World() {}
+World::World()
+{
+	this->grid = new Grid();
+}
 
 struct initiativeComparison
 {
@@ -9,6 +12,12 @@ struct initiativeComparison
 		return (organism1->initiative > organism2->initiative);
 	}
 };
+
+void World::drawWorld()
+{
+	this->grid->drawGrid();
+	this->grid->saveGridState();
+}
 
 //takes an organism and spawns it in the cell
 void World::spawnOrganism(Organism& organism)
