@@ -24,36 +24,39 @@ int Animal::collision(Organism* _organism)
 	return -1;
 }
 
-bool Animal::inBounds(int value)
+void Animal::move()
 {
-	return (0 < value) && (value < 19);
+	int option;
+	option = rand() % 4;
+
+	if (option == 0 && this->x > 0)                                       //TAKE CARE OF THE CASE WHEN ORGANISM IS NEXT TO THE WALL AND OPTION IS THE WALL
+	{
+		this->x--; //goes up
+	}
+	else if (option == 1 && this->x < GRIDWIDTH - 1)
+	{
+		this->x++; //goes down
+	}
+	else if (option == 2 && this->y > 0)
+	{
+		this->y--; //goes left
+	}
+	else if (option == 3 && this->y < GRIDHEIGHT - 1)
+	{
+		this->y++; //goes right
+	}
+	else
+	{
+		move();
+	}
 }
 
 void Animal::action(Grid* grid, World* world)
 {
 	//random move
-	int option;
-	option = rand() % 4;
-
 	int oldX = this->x;
 	int oldY = this->y;
-
-	if (option == 0 && inBounds(this->x))                                       //TAKE CARE OF THE CASE WHEN ORGANISM IS NEXT TO THE WALL AND OPTION IS THE WALL
-	{
-		this->x--; //goes up
-	}
-	else if (option == 1 && inBounds(this->x))
-	{
-		this->x++; //goes down
-	}
-	else if (option == 2 && inBounds(this->y))
-	{
-		this->y--; //goes left
-	}
-	else if (option == 3 && inBounds(this->y))
-	{
-		this->y++; //goes right
-	}
+	move();
 
 	if (!grid->getCell(this->x, this->y)->isEmpty()) //checking if grid that the organism went to is occupied
 	{

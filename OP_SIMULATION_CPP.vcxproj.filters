@@ -39,6 +39,9 @@
     <ClCompile Include="grass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="sowthistle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cell.h">
@@ -63,6 +66,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="grass.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sowthistle.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -145,6 +145,7 @@
     <ClCompile Include="grid.cpp" />
     <ClCompile Include="animal.cpp" />
     <ClCompile Include="plant.cpp" />
+    <ClCompile Include="sowthistle.cpp" />
     <ClCompile Include="wolf.cpp" />
     <ClCompile Include="world.cpp" />
   </ItemGroup>
@@ -154,6 +155,7 @@
     <ClInclude Include="grid.h" />
     <ClInclude Include="animal.h" />
     <ClInclude Include="plant.h" />
+    <ClInclude Include="sowthistle.h" />
     <ClInclude Include="wolf.h" />
     <ClInclude Include="organism.h" />
     <ClInclude Include="world.h" />

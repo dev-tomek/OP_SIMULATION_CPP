@@ -46,7 +46,7 @@ void World::makeTurn()
 	std::sort(organismsAlive.begin(), organismsAlive.end(), initiativeComparison());
 	for (int i = 0; i < organismsAlive.size(); i++)
 	{
-		std::cout << organismsAlive[i]->name << " with initiative: " << organismsAlive[i]->initiative << " uses his action" << std::endl;
+		//std::cout << organismsAlive[i]->name << " with initiative: " << organismsAlive[i]->initiative << " uses his action" << std::endl;
 		organismsAlive[i]->action(this->grid, this);
 	}
 }

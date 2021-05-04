@@ -54,6 +54,38 @@ Cell* Grid::findNearestEmpty(int _x, int _y)
 	return nullptr;
 }
 
+Cell* Grid::findRandomEmpty(int _x, int _y)
+{
+	int option;
+	option = rand() % 4;
+	Cell* result = nullptr;
+
+	if (option == 0 && _x > 0)                                       //TAKE CARE OF THE CASE WHEN ORGANISM IS NEXT TO THE WALL AND OPTION IS THE WALL
+	{
+		if (this->worldgrid[_x - 1][_y].isEmpty()) return &this->worldgrid[_x - 1][_y];
+	}
+	else if (option == 1 && _x < GRIDWIDTH - 1)
+	{
+		if (this->worldgrid[_x + 1][_y].isEmpty()) return &this->worldgrid[_x - 1][_y];
+		else result = findRandomEmpty(_x, _y);
+	}
+	else if (option == 2 && _y > 0)
+	{
+		if (this->worldgrid[_x][_y - 1].isEmpty()) return &this->worldgrid[_x][_y - 1];
+		else result = findRandomEmpty(_x, _y);
+	}
+	else if (option == 3 && _y < GRIDHEIGHT - 1)
+	{
+		if (this->worldgrid[_x][_y + 1].isEmpty()) return &this->worldgrid[_x][_y + 1];
+		else result = findRandomEmpty(_x, _y);
+	}
+	else
+	{
+		result = findRandomEmpty(_x, _y);
+	}
+	return result;
+}
+
 //autosave function
 void Grid::saveGridState()
 {
