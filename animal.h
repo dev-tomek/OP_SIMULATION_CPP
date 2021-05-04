@@ -17,7 +17,7 @@ public:
 	~Animal();
 	virtual void action(Grid* grid, World* world);
 	virtual int collision(Organism* _organism);
-	virtual bool inBounds(int x, int y);
+	virtual bool inBounds(int value);
 	virtual char draw();
 };
 

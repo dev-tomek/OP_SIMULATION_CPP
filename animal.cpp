@@ -24,9 +24,9 @@ int Animal::collision(Organism* _organism)
 	return -1;
 }
 
-bool Animal::inBounds(int x, int y)
+bool Animal::inBounds(int value)
 {
-	return ((0 < x < 19) && (0 < y < 19));
+	return (0 < value) && (value < 19);
 }
 
 void Animal::action(Grid* grid, World* world)
@@ -38,27 +38,26 @@ void Animal::action(Grid* grid, World* world)
 	int oldX = this->x;
 	int oldY = this->y;
 
-	if (option == 0 && this->x > 0)                                       //TAKE CARE OF THE CASE WHEN ORGANISM IS NEXT TO THE WALL AND OPTION IS THE WALL
+	if (option == 0 && inBounds(this->x))                                       //TAKE CARE OF THE CASE WHEN ORGANISM IS NEXT TO THE WALL AND OPTION IS THE WALL
 	{
 		this->x--; //goes up
 	}
-	else if (option == 1 && this->x < GRIDHEIGHT - 1)
+	else if (option == 1 && inBounds(this->x))
 	{
 		this->x++; //goes down
 	}
-	else if (option == 2 && this->y > 0)
+	else if (option == 2 && inBounds(this->y))
 	{
 		this->y--; //goes left
 	}
-	else if (option == 3 && this->y < GRIDWIDTH - 1)
+	else if (option == 3 && inBounds(this->y))
 	{
 		this->y++; //goes right
 	}
 
-	if ((!grid->getCell(this->x, this->y)->isEmpty()) && (inBounds(this->x, this->y))) //checking if grid that the organism went to isn't empty
+	if (!grid->getCell(this->x, this->y)->isEmpty()) //checking if grid that the organism went to is occupied
 	{
 		Organism* occupier = grid->getCell(this->x, this->y)->organism; //get organism on that cell
-		
 		int attackerState = collision(occupier);                        //collision handling for attacker
 		int occupierState = occupier->collision(this);					//collision handling for occupier
 		if (attackerState == BREED)
