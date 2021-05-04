@@ -6,6 +6,8 @@
 
 #define BREED 1
 #define KILLED 2
+#define ALIVE -1
+#define REFLECT 3
 
 class Grid;
 class Cell;

@@ -29,19 +29,19 @@ int main()
 {
 	char choice = -1;
 	World world;
-	Wolf wolf2(6, 17, 3, 4);
-	Wolf wolf3(9, 12, 4, 6);
+	Wolf wolf2(13, 5);
+	Wolf wolf3(13, 15);
 	Grass grass(6, 5);
 	Sowthistle sowthistle(9, 9);
 	Fox fox(15, 2);
-	Turtle turtle(13, 4);
+	Turtle turtle(13, 10);
 	Sheep sheep(2, 19);
 	srand(0);
 
 	while (choice != '3')
 	{
 		printUI();
-		std::cin >> choice;
+		choice = getchar();
 		switch (choice)
 		{
 		case '1':
@@ -54,7 +54,7 @@ int main()
 			world.spawnOrganism(fox);
 			world.spawnOrganism(turtle);
 			world.spawnOrganism(sheep);
-			int t = 188;
+			int t = 4;
 			while (choice != '2')
 			{
 				t--;
@@ -93,8 +93,5 @@ int main()
 }
 
 //todo
-//debug the program
-//debug sowthistle
 //implement turtle's collision
-//equal strength problem
 //turn starts from turn 2 

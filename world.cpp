@@ -36,6 +36,7 @@ void World::deleteOrganism(Organism* organism)
 			organismsAlive.erase(organismsAlive.begin() + i);
 		}
 	}
+	grid->getCell(organism->x, organism->y)->clear();
 }
 
 void World::makeTurn()

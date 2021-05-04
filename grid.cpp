@@ -63,15 +63,16 @@ Cell* Grid::findNearestEmpty(int _x, int _y)
 Cell* Grid::findRandomEmpty(int _x, int _y)
 {
 	int optionStart = rand() % 4;
-	int option = optionStart;
+	int option = optionStart + 1;
 	int candX, candY;
 	bool found = false;
 	
 	while (!found)
 	{
+		option = option % 4;
+		if (option == optionStart) return nullptr;
 		candX = _x;
 		candY = _y;
-		option = option % 4;
 		if (option == 0) candX--;
 		else if (option == 1) candX++;
 		else if (option == 2) candY--;
@@ -79,7 +80,6 @@ Cell* Grid::findRandomEmpty(int _x, int _y)
 		if (candX < 0 || candX >= GRIDWIDTH || candY < 0 || candY >= GRIDHEIGHT) option++;
 		else if (!this->getCell(candX, candY)->isEmpty()) option++;
 		else found = true;
-		if (option == optionStart) return nullptr;
 	}
 	return this->getCell(candX, candY);
 }

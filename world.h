@@ -12,10 +12,10 @@ class Cell;
 class World
 {
 private:
-	Grid* grid;
 	int turn;
 public:
 	std::vector<Organism*> organismsAlive;
+	Grid* grid;
 public:
 	World();
 	~World();

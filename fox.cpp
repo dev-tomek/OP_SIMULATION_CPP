@@ -16,6 +16,7 @@ void Fox::action(Grid* grid, World* world)
 	int oldY = this->y;
 	move();
 
+	bool canMove = true;
 	if (!grid->getCell(this->x, this->y)->isEmpty()) //checking if grid that the organism went to is occupied
 	{
 		Organism* occupier = grid->getCell(this->x, this->y)->organism; //get organism on that cell
@@ -27,30 +28,19 @@ void Fox::action(Grid* grid, World* world)
 		}
 		int attackerState = collision(occupier);                        //collision handling for attacker
 		int occupierState = occupier->collision(this);					//collision handling for occupier
-		if (attackerState == BREED)
-		{
-			Cell* emptyCell = grid->findRandomEmpty(this->x, this->y);
-			if (emptyCell == nullptr) return;
-			Organism* newOrganism = this->createNew(emptyCell);
-			world->spawnOrganism(*newOrganism);
-			this->x = oldX;
-			this->y = oldY;
-		}
-		if (attackerState == KILLED)
-		{
-			world->deleteOrganism(this);
-			grid->getCell(oldX, oldY)->clear(); //deleting old 
-			return;
-		}
-		if (occupierState == KILLED)
-		{
-			world->deleteOrganism(occupier);
-		}
+		canMove = collisionResult(attackerState, occupierState, world, occupier);
 	}
-	grid->getCell(oldX, oldY)->clear(); //deleting old 
-	grid->getCell(this->x, this->y)->setOrganism(this); //setting up new
+	if (canMove)
+	{
+		grid->getCell(oldX, oldY)->clear(); //deleting old 
+		grid->getCell(this->x, this->y)->setOrganism(this); //setting up new
+	}
+	else
+	{
+		this->x = oldX;
+		this->y = oldY;
+	}
 }
-
 
 Organism* Fox::createNew(Cell* cell)
 {

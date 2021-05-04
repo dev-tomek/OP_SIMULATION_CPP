@@ -19,5 +19,6 @@ public:
 	virtual int collision(Organism* _organism);
 	virtual char draw();
 	virtual void move();
+	virtual bool collisionResult(int attackerState, int occupierState, World* world, Organism* occupier);
 };
 

@@ -7,6 +7,38 @@ char Animal::draw()
 	return this->symbol;
 }
 
+bool Animal::collisionResult(int attackerState, int occupierState, World* world, Organism* occupier)
+{
+	if (attackerState == BREED)
+	{
+		Cell* emptyCell = world->grid->findRandomEmpty(this->x, this->y);
+		if (emptyCell == nullptr) return false;
+		Organism* newOrganism = this->createNew(emptyCell);
+		world->spawnOrganism(*newOrganism);
+		return false;
+	}
+	if (attackerState == KILLED)
+	{
+		world->deleteOrganism(this);
+		return false;
+	}
+	if (occupierState == KILLED)
+	{
+		world->deleteOrganism(occupier);
+		return true;
+	}
+	if (attackerState == ALIVE && occupierState == ALIVE)
+	{
+		world->deleteOrganism(occupier);
+		return true;
+	}
+	if (occupierState == REFLECT)
+	{
+		return false;
+	}
+	return true;
+}
+
 int Animal::collision(Organism* _organism)
 {
 	if (_organism->name == this->name)
@@ -57,33 +89,24 @@ void Animal::action(Grid* grid, World* world)
 	int oldY = this->y;
 	move();
 
+	bool canMove = true;
 	if (!grid->getCell(this->x, this->y)->isEmpty()) //checking if grid that the organism went to is occupied
 	{
 		Organism* occupier = grid->getCell(this->x, this->y)->organism; //get organism on that cell
 		int attackerState = collision(occupier);                        //collision handling for attacker
 		int occupierState = occupier->collision(this);					//collision handling for occupier
-		if (attackerState == BREED)
-		{
-			Cell* emptyCell = grid->findRandomEmpty(this->x, this->y);
-			if (emptyCell == nullptr) return;
-			Organism* newOrganism = this->createNew(emptyCell);
-			world->spawnOrganism(*newOrganism);
-			this->x = oldX;
-			this->y = oldY;
-		}
-		if (attackerState == KILLED)
-		{
-			world->deleteOrganism(this);
-			grid->getCell(oldX, oldY)->clear(); //deleting old 
-			return;
-		}
-		if (occupierState == KILLED)
-		{
-			world->deleteOrganism(occupier);
-		}
+		canMove = collisionResult(attackerState, occupierState, world, occupier);
 	}
-	grid->getCell(oldX, oldY)->clear(); //deleting old 
-	grid->getCell(this->x, this->y)->setOrganism(this); //setting up new
+	if (canMove)
+	{
+		grid->getCell(oldX, oldY)->clear(); //deleting old 
+		grid->getCell(this->x, this->y)->setOrganism(this); //setting up new
+	}
+	else
+	{
+		this->x = oldX;
+		this->y = oldY;
+	}
 }
 
 Animal::~Animal()
