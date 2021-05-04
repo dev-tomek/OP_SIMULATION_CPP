@@ -11,10 +11,10 @@ void Plant::action(Grid* grid, World* world)
 	if (propability)
 	{
 		Cell* emptyCell = grid->findRandomEmpty(this->x, this->y);
+		if (emptyCell == nullptr) return;
 		Organism* newOrganism = this->createNew(emptyCell);
 		world->spawnOrganism(*newOrganism);
 	}
-	
 }
 
 char Plant::draw()

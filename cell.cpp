@@ -3,6 +3,8 @@
 Cell::Cell()
 {
 	this->organism = nullptr;
+	this->x = 0;
+	this->y = 0;
 }
 
 char Cell::getSymbol()
@@ -34,6 +36,11 @@ void Cell::setY(int value)
 bool Cell::isEmpty()
 {
 	return organism == nullptr;
+}
+
+bool OutOfBounds::isEmpty()
+{
+	return false;
 }
 
 void Cell::clear()

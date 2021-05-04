@@ -1,6 +1,5 @@
 #include "wolf.h"
 
-
 Wolf::Wolf(int _x, int _y)
 {
 	this->name = WOLFNAME;

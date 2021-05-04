@@ -8,6 +8,9 @@
 #include "world.h"
 #include "grass.h"
 #include "sowthistle.h"
+#include "sheep.h"
+#include "fox.h"
+#include "turtle.h"
 
 void printUI()
 {
@@ -27,10 +30,13 @@ int main()
 	char choice = -1;
 	World world;
 	Wolf wolf2(6, 17, 3, 4);
-	Wolf wolf3(6, 16, 4, 6);
+	Wolf wolf3(9, 12, 4, 6);
 	Grass grass(6, 5);
 	Sowthistle sowthistle(9, 9);
-	srand(time(NULL));
+	Fox fox(15, 2);
+	Turtle turtle(13, 4);
+	Sheep sheep(2, 19);
+	srand(0);
 
 	while (choice != '3')
 	{
@@ -45,21 +51,26 @@ int main()
 			world.spawnOrganism(wolf3);
 			world.spawnOrganism(grass);
 			world.spawnOrganism(sowthistle);
+			world.spawnOrganism(fox);
+			world.spawnOrganism(turtle);
+			world.spawnOrganism(sheep);
+			int t = 188;
 			while (choice != '2')
 			{
-				world.drawWorld();
+				t--;
+			
+				system("CLS");
 				world.makeTurn();
-				std::cout << wolf2.x << " " << wolf2.y << std::endl;
-				std::cout << wolf3.x << " " << wolf3.y << std::endl;
-				//std::cin >> choice;
-				choice = getchar(); //sometimes doesn't work as required
+				world.drawWorld();
+				//choice = getchar(); //sometimes doesn't work as required
 				//while (_kbhit()) {};
 
-				system("CLS");
+				
 
-				//position
+				if (t > 0) continue;
+				choice = getchar();
 			}
-			system("CLS");
+			//system("CLS");
 			break;
 		}
 		case '2':
@@ -82,5 +93,8 @@ int main()
 }
 
 //todo
-//kill
-//some idea for loading the game state
+//debug the program
+//debug sowthistle
+//implement turtle's collision
+//equal strength problem
+//turn starts from turn 2 

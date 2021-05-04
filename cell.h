@@ -16,8 +16,14 @@ public:
 	int getY();
 	void setX(int value);
 	void setY(int value);
-	bool isEmpty();
+	virtual bool isEmpty();
 	void clear();
 	void setOrganism(Organism* organism);
 	~Cell();
+};
+
+class OutOfBounds : public Cell
+{
+public:
+	bool isEmpty() override;
 };

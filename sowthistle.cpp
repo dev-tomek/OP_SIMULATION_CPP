@@ -13,10 +13,11 @@ void Sowthistle::action(Grid* grid, World* world)
 {
 	for (int i = 0; i < 3; i++)
 	{
-		bool propability = (rand() % 100) < 30;
+		bool propability = (rand() % 100) < 5;
 		if (propability)
 		{
 			Cell* emptyCell = grid->findRandomEmpty(this->x, this->y);
+			if (emptyCell == nullptr) return;
 			Organism* newOrganism = this->createNew(emptyCell);
 			world->spawnOrganism(*newOrganism);
 			return;

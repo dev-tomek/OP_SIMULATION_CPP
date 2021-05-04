@@ -42,6 +42,15 @@
     <ClCompile Include="sowthistle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="sheep.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="turtle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cell.h">
@@ -69,6 +78,15 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="sowthistle.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sheep.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="turtle.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fox.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

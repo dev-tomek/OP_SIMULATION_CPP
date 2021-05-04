@@ -1,61 +1,24 @@
-#include "animal.h"
+#include "turtle.h"
 
-Animal::Animal() {}
-
-char Animal::draw()
+Turtle::Turtle(int _x, int _y)
 {
-	return this->symbol;
+	this->name = TURTLENAME;
+	this->symbol = TURTLESYMBOL;
+	this->strength = TURTLESTRENGTH;
+	this->initiative = TURTLEINITIATIVE;
+	this->x = _x;
+	this->y = _y;
 }
 
-int Animal::collision(Organism* _organism)
+void Turtle::action(Grid* grid, World* world)
 {
-	if (_organism->name == this->name)
-	{
-		return BREED;
-	}
-	else
-	{
-		if (_organism->strength > this->strength)    // TAKE CARE OF EQUAL STRENGTH
-		{
-			return KILLED;
-		}
-	}
-	return -1;
-}
-
-void Animal::move()
-{
-	int option;
-	option = rand() % 4;
-
-	if (option == 0 && this->x > 0)
-	{
-		this->x--; //goes up
-	}
-	else if (option == 1 && this->x < GRIDWIDTH - 1)
-	{
-		this->x++; //goes down
-	}
-	else if (option == 2 && this->y > 0)
-	{
-		this->y--; //goes left
-	}
-	else if (option == 3 && this->y < GRIDHEIGHT - 1)
-	{
-		this->y++; //goes right
-	}
-	else
+	int oldX = this->x;
+	int oldY = this->y;
+	bool propability = (rand() % 100) < 75;
+	if (!propability)
 	{
 		move();
 	}
-}
-
-void Animal::action(Grid* grid, World* world)
-{
-	//random move
-	int oldX = this->x;
-	int oldY = this->y;
-	move();
 
 	if (!grid->getCell(this->x, this->y)->isEmpty()) //checking if grid that the organism went to is occupied
 	{
@@ -64,8 +27,7 @@ void Animal::action(Grid* grid, World* world)
 		int occupierState = occupier->collision(this);					//collision handling for occupier
 		if (attackerState == BREED)
 		{
-			Cell* emptyCell = grid->findRandomEmpty(this->x, this->y);
-			if (emptyCell == nullptr) return;
+			Cell* emptyCell = grid->findNearestEmpty(this->x, this->y);
 			Organism* newOrganism = this->createNew(emptyCell);
 			world->spawnOrganism(*newOrganism);
 			this->x = oldX;
@@ -80,13 +42,26 @@ void Animal::action(Grid* grid, World* world)
 		if (occupierState == KILLED)
 		{
 			world->deleteOrganism(occupier);
+			return;
 		}
 	}
 	grid->getCell(oldX, oldY)->clear(); //deleting old 
 	grid->getCell(this->x, this->y)->setOrganism(this); //setting up new
 }
 
-Animal::~Animal()
+int Turtle::collision(Organism* _organism)
+{
+	return 0;
+}
+
+Organism* Turtle::createNew(Cell* cell)
+{
+	Organism* newTurtle = new Turtle(cell->getX(), cell->getY());
+	return newTurtle;
+}
+
+Turtle::~Turtle()
 {
 	std::cout << "default destructor" << std::endl;
 }
+

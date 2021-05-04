@@ -1,4 +1,5 @@
 #include "grid.h"
+#include <vector>
 
 Grid::Grid()
 {
@@ -12,10 +13,15 @@ Grid::Grid()
 			this->worldgrid[i][j].setY(j);
 		}
 	}
+	this->outOfBounds = new OutOfBounds;
 }
 
 Cell* Grid::getCell(int _x, int _y)
 {
+	if (_x < 0  || _x > GRIDWIDTH - 1 || _y < 0 || _y > GRIDHEIGHT - 1)
+	{
+		return this->outOfBounds;
+	}
 	return &this->worldgrid[_x][_y];
 }
 
@@ -35,19 +41,19 @@ void Grid::drawGrid()
 
 Cell* Grid::findNearestEmpty(int _x, int _y)
 {
-	if (this->worldgrid[_x - 1][_y].isEmpty() && _x > 0)
+	if (this->getCell(_x - 1, _y)->isEmpty() && _x > 0)
 	{
 		return &worldgrid[_x - 1][_y];
 	}
-	else if (this->worldgrid[_x + 1][_y].isEmpty() && _x < GRIDWIDTH - 1)
+	else if (this->getCell(_x + 1, _y)->isEmpty() && _x < GRIDWIDTH - 1)
 	{
 		return &worldgrid[_x + 1][_y];
 	}
-	else if (this->worldgrid[_x][_y - 1].isEmpty() && _y > 0)
+	else if (this->getCell(_x, _y - 1)->isEmpty() && _y > 0)
 	{
 		return &worldgrid[_x][_y - 1];
 	}
-	else if (this->worldgrid[_x][_y + 1].isEmpty() && _y < GRIDHEIGHT - 1)
+	else if (this->getCell(_x, _y + 1)->isEmpty() && _y < GRIDHEIGHT - 1)
 	{
 		return &worldgrid[_x][_y + 1];
 	}
@@ -56,34 +62,26 @@ Cell* Grid::findNearestEmpty(int _x, int _y)
 
 Cell* Grid::findRandomEmpty(int _x, int _y)
 {
-	int option;
-	option = rand() % 4;
-	Cell* result = nullptr;
-
-	if (option == 0 && _x > 0)                                       //TAKE CARE OF THE CASE WHEN ORGANISM IS NEXT TO THE WALL AND OPTION IS THE WALL
+	int optionStart = rand() % 4;
+	int option = optionStart;
+	int candX, candY;
+	bool found = false;
+	
+	while (!found)
 	{
-		if (this->worldgrid[_x - 1][_y].isEmpty()) return &this->worldgrid[_x - 1][_y];
+		candX = _x;
+		candY = _y;
+		option = option % 4;
+		if (option == 0) candX--;
+		else if (option == 1) candX++;
+		else if (option == 2) candY--;
+		else if (option == 3) candY++;
+		if (candX < 0 || candX >= GRIDWIDTH || candY < 0 || candY >= GRIDHEIGHT) option++;
+		else if (!this->getCell(candX, candY)->isEmpty()) option++;
+		else found = true;
+		if (option == optionStart) return nullptr;
 	}
-	else if (option == 1 && _x < GRIDWIDTH - 1)
-	{
-		if (this->worldgrid[_x + 1][_y].isEmpty()) return &this->worldgrid[_x - 1][_y];
-		else result = findRandomEmpty(_x, _y);
-	}
-	else if (option == 2 && _y > 0)
-	{
-		if (this->worldgrid[_x][_y - 1].isEmpty()) return &this->worldgrid[_x][_y - 1];
-		else result = findRandomEmpty(_x, _y);
-	}
-	else if (option == 3 && _y < GRIDHEIGHT - 1)
-	{
-		if (this->worldgrid[_x][_y + 1].isEmpty()) return &this->worldgrid[_x][_y + 1];
-		else result = findRandomEmpty(_x, _y);
-	}
-	else
-	{
-		result = findRandomEmpty(_x, _y);
-	}
-	return result;
+	return this->getCell(candX, candY);
 }
 
 //autosave function

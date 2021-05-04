@@ -40,7 +40,7 @@ void World::deleteOrganism(Organism* organism)
 
 void World::makeTurn()
 {
-	++this->turn;
+	this->turn++;
 	std::cout << "TURN NUMBER: " << turn << std::endl;
 	//sorting a vector of alive animals by their initiative descendingly
 	std::sort(organismsAlive.begin(), organismsAlive.end(), initiativeComparison());

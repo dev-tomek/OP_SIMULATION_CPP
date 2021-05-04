@@ -11,6 +11,7 @@ class Grid
 private:
 	std::ofstream fileOut;
 	Cell** worldgrid;
+	Cell* outOfBounds;
 public:
 	Grid();
 	void saveGridState();
