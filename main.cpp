@@ -67,7 +67,7 @@ int main()
 
 				
 
-				if (t > 0) continue;
+				//if (t > 0) continue;
 				choice = getchar();
 			}
 			//system("CLS");
