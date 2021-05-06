@@ -17,6 +17,16 @@ bool Animal::collisionResult(int attackerState, int occupierState, World* world,
 		world->spawnOrganism(*newOrganism);
 		return false;
 	}
+	if (occupierState == ESCAPE)
+	{
+		Cell* escapeTo = world->grid->findRandomEmpty(occupier->x, occupier->y); 
+		if (escapeTo == nullptr)
+		{
+			world->deleteOrganism(occupier);
+			return true;
+		}
+		else world->grid->getCell(escapeTo->x, escapeTo->y)->setOrganism(occupier);
+	}
 	if (attackerState == KILLED)
 	{
 		world->deleteOrganism(this);
@@ -27,7 +37,7 @@ bool Animal::collisionResult(int attackerState, int occupierState, World* world,
 		world->deleteOrganism(occupier);
 		return true;
 	}
-	if (attackerState == ALIVE && occupierState == ALIVE)
+	if (attackerState == ALIVE && occupierState == ALIVE) //attacker wins when the strength is equal
 	{
 		world->deleteOrganism(occupier);
 		return true;
@@ -47,7 +57,15 @@ int Animal::collision(Organism* _organism)
 	}
 	else
 	{
-		if (_organism->strength > this->strength)    // TAKE CARE OF EQUAL STRENGTH
+		if (_organism->name == "guarana")
+		{
+			this->strength = this->strength + 3;
+		}
+		if (_organism->name == "hogweed")
+		{
+			return KILLED;
+		}
+		if (_organism->strength > this->strength) 
 		{
 			return KILLED;
 		}
@@ -62,19 +80,19 @@ void Animal::move()
 
 	if (option == 0 && this->x > 0)
 	{
-		this->x--; //goes up
+		this->x--;
 	}
 	else if (option == 1 && this->x < GRIDWIDTH - 1)
 	{
-		this->x++; //goes down
+		this->x++;
 	}
 	else if (option == 2 && this->y > 0)
 	{
-		this->y--; //goes left
+		this->y--;
 	}
 	else if (option == 3 && this->y < GRIDHEIGHT - 1)
 	{
-		this->y++; //goes right
+		this->y++;
 	}
 	else
 	{

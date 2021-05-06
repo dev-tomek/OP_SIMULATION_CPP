@@ -13,7 +13,7 @@ void Sowthistle::action(Grid* grid, World* world)
 {
 	for (int i = 0; i < 3; i++)
 	{
-		bool propability = (rand() % 100) < 5;
+		bool propability = (rand() % 100) < 2;
 		if (propability)
 		{
 			Cell* emptyCell = grid->findRandomEmpty(this->x, this->y);

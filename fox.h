@@ -5,7 +5,7 @@
 #define FOXSTRENGTH 3;
 #define FOXINITIATIVE 7;
 #define FOXSYMBOL '$'
-#define FOXNAME "turtle";
+#define FOXNAME "fox";
 
 class Fox : public Animal
 {

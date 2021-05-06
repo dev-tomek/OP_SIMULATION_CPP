@@ -51,6 +51,21 @@
     <ClCompile Include="fox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="antelope.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="guarana.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="belladonna.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sosnowskyhogweed.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="human.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cell.h">
@@ -87,6 +102,21 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="fox.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="antelope.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="guarana.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="belladonna.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sosnowskyhogweed.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="human.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

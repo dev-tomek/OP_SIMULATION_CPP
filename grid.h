@@ -17,7 +17,6 @@ public:
 	void saveGridState();
 	void drawGrid();
 	Cell* getCell(int _x, int _y);
-	Cell* findNearestEmpty(int _x, int _y);
 	Cell* findRandomEmpty(int _x, int _y);
 	~Grid();
 };

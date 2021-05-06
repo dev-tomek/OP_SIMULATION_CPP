@@ -7,7 +7,7 @@ Plant::Plant()
 
 void Plant::action(Grid* grid, World* world)
 {
-	bool propability = (rand() % 100) < 10;
+	bool propability = (rand() % 100) < 5;
 	if (propability)
 	{
 		Cell* emptyCell = grid->findRandomEmpty(this->x, this->y);

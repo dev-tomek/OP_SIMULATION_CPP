@@ -139,27 +139,37 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="antelope.cpp" />
+    <ClCompile Include="belladonna.cpp" />
     <ClCompile Include="fox.cpp" />
     <ClCompile Include="grass.cpp" />
+    <ClCompile Include="guarana.cpp" />
+    <ClCompile Include="human.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="cell.cpp" />
     <ClCompile Include="grid.cpp" />
     <ClCompile Include="animal.cpp" />
     <ClCompile Include="plant.cpp" />
     <ClCompile Include="sheep.cpp" />
+    <ClCompile Include="sosnowskyhogweed.cpp" />
     <ClCompile Include="sowthistle.cpp" />
     <ClCompile Include="turtle.cpp" />
     <ClCompile Include="wolf.cpp" />
     <ClCompile Include="world.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="antelope.h" />
+    <ClInclude Include="belladonna.h" />
     <ClInclude Include="cell.h" />
     <ClInclude Include="fox.h" />
     <ClInclude Include="grass.h" />
     <ClInclude Include="grid.h" />
     <ClInclude Include="animal.h" />
+    <ClInclude Include="guarana.h" />
+    <ClInclude Include="human.h" />
     <ClInclude Include="sheep.h" />
     <ClInclude Include="plant.h" />
+    <ClInclude Include="sosnowskyhogweed.h" />
     <ClInclude Include="sowthistle.h" />
     <ClInclude Include="turtle.h" />
     <ClInclude Include="wolf.h" />

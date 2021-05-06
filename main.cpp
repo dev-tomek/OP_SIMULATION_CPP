@@ -11,6 +11,11 @@
 #include "sheep.h"
 #include "fox.h"
 #include "turtle.h"
+#include "antelope.h"
+#include "guarana.h"
+#include "belladonna.h"
+#include "sosnowskyhogweed.h"
+#include "human.h"
 
 void printUI()
 {
@@ -27,48 +32,56 @@ void printUI()
 
 int main()
 {
-	char choice = -1;
+	unsigned char choice = -1;
 	World world;
-	Wolf wolf2(13, 5);
-	Wolf wolf3(13, 15);
+	Wolf wolf(13, 5);
+	Wolf wolf2(13, 15);
 	Grass grass(6, 5);
 	Sowthistle sowthistle(9, 9);
 	Fox fox(15, 2);
 	Turtle turtle(13, 10);
 	Sheep sheep(2, 19);
-	srand(0);
+	Antelope antelope(6, 13);
+	Antelope antelope2(7, 12);
+	Guarana guarana(19, 19);
+	Belladonna belladonna(2, 8);
+	Hogweed hogweed(10, 10);
+	Human human(7, 15);
+	srand(time(NULL));
 
 	while (choice != '3')
 	{
 		printUI();
-		choice = getchar();
+		choice = _getch();
 		switch (choice)
 		{
 		case '1':
 		{
 			system("CLS");
+			world.spawnOrganism(wolf);
 			world.spawnOrganism(wolf2);
-			world.spawnOrganism(wolf3);
 			world.spawnOrganism(grass);
 			world.spawnOrganism(sowthistle);
 			world.spawnOrganism(fox);
 			world.spawnOrganism(turtle);
 			world.spawnOrganism(sheep);
-			int t = 4;
+			world.spawnOrganism(antelope);
+			world.spawnOrganism(antelope2);
+			world.spawnOrganism(guarana);
+			world.spawnOrganism(belladonna);
+			world.spawnOrganism(hogweed);
+			world.spawnOrganism(human);
+			int t = 400;
 			while (choice != '2')
 			{
 				t--;
 			
 				system("CLS");
-				world.makeTurn();
 				world.drawWorld();
+				world.makeTurn();
 				//choice = getchar(); //sometimes doesn't work as required
-				//while (_kbhit()) {};
-
-				
 
 				//if (t > 0) continue;
-				choice = getchar();
 			}
 			//system("CLS");
 			break;

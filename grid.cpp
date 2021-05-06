@@ -39,27 +39,6 @@ void Grid::drawGrid()
 	std::cout << "----------------------------------------" << std::endl;
 }
 
-Cell* Grid::findNearestEmpty(int _x, int _y)
-{
-	if (this->getCell(_x - 1, _y)->isEmpty() && _x > 0)
-	{
-		return &worldgrid[_x - 1][_y];
-	}
-	else if (this->getCell(_x + 1, _y)->isEmpty() && _x < GRIDWIDTH - 1)
-	{
-		return &worldgrid[_x + 1][_y];
-	}
-	else if (this->getCell(_x, _y - 1)->isEmpty() && _y > 0)
-	{
-		return &worldgrid[_x][_y - 1];
-	}
-	else if (this->getCell(_x, _y + 1)->isEmpty() && _y < GRIDHEIGHT - 1)
-	{
-		return &worldgrid[_x][_y + 1];
-	}
-	return nullptr;
-}
-
 Cell* Grid::findRandomEmpty(int _x, int _y)
 {
 	int optionStart = rand() % 4;

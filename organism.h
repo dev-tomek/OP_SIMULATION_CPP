@@ -8,6 +8,7 @@
 #define KILLED 2
 #define ALIVE -1
 #define REFLECT 3
+#define ESCAPE 4
 
 class Grid;
 class Cell;

@@ -11,7 +11,6 @@ class Wolf : public Animal
 {
 public:
 	Wolf(int _x, int _y);
-	Wolf(int _x, int _y, int init, int str);
 	Organism* createNew(Cell* cell) override;
 	~Wolf();
 };
