@@ -25,7 +25,8 @@ void printUI()
 	std::cout << "--------MAIN MENU--------" << std::endl;
 	std::cout << "1. Start" << std::endl;
 	std::cout << "2. Continue" << std::endl;
-	std::cout << "3. Quit" << std::endl;
+	std::cout << "3. Instruction" << std::endl;
+	std::cout << "4. Quit" << std::endl;
 	std::cout << "-------------------------" << std::endl;
 	std::cout << "Your choice: ";
 }
@@ -47,9 +48,10 @@ int main()
 	Belladonna belladonna(2, 8);
 	Hogweed hogweed(10, 10);
 	Human human(7, 15);
-	srand(time(NULL));
+	//srand(time(NULL)); different seed every time
+	srand(0);
 
-	while (choice != '3')
+	while (choice != '4')
 	{
 		printUI();
 		choice = _getch();
@@ -57,6 +59,7 @@ int main()
 		{
 		case '1':
 		{
+			world.restart();
 			system("CLS");
 			world.spawnOrganism(wolf);
 			world.spawnOrganism(wolf2);
@@ -75,36 +78,67 @@ int main()
 			while (choice != '2')
 			{
 				t--;
-			
 				system("CLS");
 				world.drawWorld();
-				world.makeTurn();
-				//choice = getchar(); //sometimes doesn't work as required
-
+				if (world.makeTurn() == 0)
+				{
+					char goback = '\t';
+					std::cout << "GAME OVER!" << std::endl;
+					std::cout << "PRESS ANY BUTTON TO GO BACK TO THE MENU" << std::endl;
+					goback = _getch();
+					if (goback != '\t')
+					{
+						system("CLS");
+						break;
+					}
+				}
 				//if (t > 0) continue;
 			}
-			//system("CLS");
 			break;
 		}
 		case '2':
 		{
 			system("CLS");
-
 			std::cout << "LOADING" << std::endl;
 		}
 		case '3':
+		{
+			system("CLS");
+			std::cout << "-------------------" << std::endl;
+			std::cout << "    INSTRUCTION" << std::endl;
+			std::cout << "-------------------" << std::endl;
+			std::cout << "W - UP" << std::endl;
+			std::cout << "S - DOWN" << std::endl;
+			std::cout << "A - LEFT" << std::endl;
+			std::cout << "D - RIGHT" << std::endl;
+			std::cout << "Q - SPECIAL ABILITY" << std::endl;
+			std::cout << "-------------------" << std::endl;
+			std::cout << "GAME EXPLANATION " << std::endl;
+			std::cout << "-------------------" << std::endl;
+			std::cout << "You found yourself in wilderness." << std::endl;
+			std::cout << "Around you there are plenty of dangerous animals" << std::endl;
+			std::cout << "that will easily harm you. You have two choices: " << std::endl;
+			std::cout << "Run or fight! " << std::endl;
+			std::cout << "{Your special ability is a strength increase} " << std::endl;
+			std::cout << "------------------------------------------------" << std::endl;
+			char goback = _getch();
+			if (goback != '\t')
+			{
+				system("CLS");
+				break;
+			}
+			break;
+		}
+		case '4':
 		{
 			break;
 		}
 		default:
 		{
+			system("CLS");
 			std::cout << "Choice does not exist." << std::endl;
 			break;
 		}
 		}
 	}
 }
-
-//todo
-//implement turtle's collision
-//turn starts from turn 2 

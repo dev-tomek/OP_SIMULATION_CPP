@@ -12,6 +12,7 @@ Belladonna::Belladonna(int _x, int _y)
 Organism* Belladonna::createNew(Cell* cell)
 {
 	Organism* newBelladonna = new Belladonna(cell->getX(), cell->getY());
+	toEverLive.push_back(newBelladonna);
 	return newBelladonna;
 }
 

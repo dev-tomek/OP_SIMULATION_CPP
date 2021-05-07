@@ -1,6 +1,9 @@
 #include "animal.h"
 
-Animal::Animal() {}
+Animal::Animal() 
+{
+	this->age = INITIAL_AGE;
+}
 
 char Animal::draw()
 {

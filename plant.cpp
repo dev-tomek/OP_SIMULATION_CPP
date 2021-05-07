@@ -3,6 +3,7 @@
 Plant::Plant()
 {
 	this->initiative = PLANTINITIATIVE;
+	this->age = INITIAL_AGE;
 };
 
 void Plant::action(Grid* grid, World* world)

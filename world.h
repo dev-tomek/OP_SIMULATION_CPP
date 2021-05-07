@@ -16,12 +16,12 @@ private:
 public:
 	std::vector<Organism*> organismsAlive;
 	Grid* grid;
-public:
 	World();
 	~World();
 	void drawWorld();
-	void makeTurn();
+	void restart();
 	void spawnOrganism(Organism& organism);
 	void deleteOrganism(Organism* organism);
+	int makeTurn();
 };
 

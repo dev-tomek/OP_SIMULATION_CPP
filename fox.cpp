@@ -45,6 +45,7 @@ void Fox::action(Grid* grid, World* world)
 Organism* Fox::createNew(Cell* cell)
 {
 	Organism* newFox = new Fox(cell->getX(), cell->getY());
+	toEverLive.push_back(newFox);
 	return newFox;
 }
 

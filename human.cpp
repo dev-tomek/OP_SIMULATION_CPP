@@ -35,6 +35,29 @@ void Human::move()
 	}
 }
 
+int Human::collision(Organism* _organism)
+{
+	static int roundsLeft = 0;
+	if (roundsLeft == 0)
+	{
+		std::cout << "SPECIAL ABILITY - PRESS Q" << std::endl;
+		char abilityActivated = _getch();
+		if ((abilityActivated == 'q' || abilityActivated == 'Q') && roundsLeft == 0)
+		{
+			std::cout << "SPECIAL ABILITY ACTIVATED" << std::endl;
+			this->strength = 10;
+			roundsLeft = 5;
+		}
+	}
+	if (roundsLeft > 0)
+	{
+		roundsLeft--;
+		this->strength--;
+	}
+	int result = Animal::collision(_organism);
+	return result;
+}
+
 void Human::action(Grid* grid, World* world)
 {
 	int oldX = this->x;
@@ -65,10 +88,10 @@ void Human::action(Grid* grid, World* world)
 Organism* Human::createNew(Cell* cell)
 {
 	Organism* newHuman = new Human(cell->getX(), cell->getY());
+	toEverLive.push_back(newHuman);
 	return newHuman;
 }
 
 Human::~Human()
 {
-
 }

@@ -12,6 +12,7 @@ Grass::Grass(int _x, int _y)
 Organism* Grass::createNew(Cell* cell)
 {
 	Organism* newGrass = new Grass(cell->getX(), cell->getY());
+	toEverLive.push_back(newGrass);
 	return newGrass;
 }
 

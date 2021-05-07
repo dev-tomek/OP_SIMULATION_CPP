@@ -13,6 +13,7 @@ Sheep::Sheep(int _x, int _y)
 Organism* Sheep::createNew(Cell* cell)
 {
 	Organism* newSheep = new Sheep(cell->getX(), cell->getY());
+	toEverLive.push_back(newSheep);
 	return newSheep;
 }
 

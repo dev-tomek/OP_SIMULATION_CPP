@@ -55,6 +55,7 @@ int Turtle::collision(Organism* _organism)
 Organism* Turtle::createNew(Cell* cell)
 {
 	Organism* newTurtle = new Turtle(cell->getX(), cell->getY());
+	toEverLive.push_back(newTurtle);
 	return newTurtle;
 }
 

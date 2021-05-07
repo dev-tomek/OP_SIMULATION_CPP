@@ -102,6 +102,7 @@ void Antelope::action(Grid* grid, World* world)
 Organism* Antelope::createNew(Cell* cell)
 {
 	Organism* newAntelope = new Antelope(cell->getX(), cell->getY());
+	toEverLive.push_back(newAntelope);
 	return newAntelope;
 }
 

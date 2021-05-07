@@ -6,10 +6,14 @@ World::World()
 	this->turn = 0;
 }
 
-struct initiativeComparison
+struct Comparator
 {
 	inline bool operator() (const Organism* organism1, const Organism* organism2)
 	{
+		if (organism1->initiative == organism2->initiative)
+		{
+			return organism1->age > organism2->age;
+		}
 		return (organism1->initiative > organism2->initiative);
 	}
 };
@@ -39,17 +43,42 @@ void World::deleteOrganism(Organism* organism)
 	grid->getCell(organism->x, organism->y)->clear();
 }
 
-void World::makeTurn()
+int World::makeTurn()
 {
-	this->turn++;
-	std::cout << "TURN NUMBER: " << turn << std::endl;
-	//sorting a vector of alive animals by their initiative descendingly
-	std::sort(organismsAlive.begin(), organismsAlive.end(), initiativeComparison());
 	for (int i = 0; i < organismsAlive.size(); i++)
 	{
-		//std::cout << organismsAlive[i]->name << " with initiative: " << organismsAlive[i]->initiative << " uses his action" << std::endl;
-		organismsAlive[i]->action(this->grid, this);
+		organismsAlive[i]->age++;
 	}
+	this->turn++;
+	bool humanAlive = false;
+	std::cout << "TURN NUMBER: " << turn << std::endl;
+	for (int i = 0; i < organismsAlive.size(); i++)
+	{
+		if (organismsAlive[i]->name == "human") humanAlive = true;
+	}
+	if (!humanAlive) return 0;
+	else
+	{
+		//sorting a vector of alive animals by their initiative and age descendingly
+		std::sort(organismsAlive.begin(), organismsAlive.end(), Comparator());
+		for (int i = 0; i < organismsAlive.size(); i++)
+		{
+			//std::cout << organismsAlive[i]->name << " with initiative: " << organismsAlive[i]->initiative << " uses his action" << std::endl;
+			organismsAlive[i]->action(this->grid, this);
+		}
+	}
+	return 1;
+}
+
+void World::restart()
+{
+	for (int i = 0; i < organismsAlive.size(); i++)
+	{
+		this->turn = 0;
+		organismsAlive[i]->age = 0;
+		deleteOrganism(organismsAlive[i]);
+	}
+	organismsAlive.empty();
 }
 
 World::~World() {}

@@ -12,6 +12,7 @@ Hogweed::Hogweed(int _x, int _y)
 Organism* Hogweed::createNew(Cell* cell)
 {
 	Organism* newHogweed = new Hogweed(cell->getX(), cell->getY());
+	toEverLive.push_back(newHogweed);
 	return newHogweed;
 }
 

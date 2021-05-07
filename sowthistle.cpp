@@ -28,6 +28,7 @@ void Sowthistle::action(Grid* grid, World* world)
 Organism* Sowthistle::createNew(Cell* cell)
 {
 	Organism* newSowthistle = new Sowthistle(cell->getX(), cell->getY());
+	toEverLive.push_back(newSowthistle);
 	return newSowthistle;
 }
 
